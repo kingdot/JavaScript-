@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    {{message}}
+</div>
+<div id="app2">
+    <div v-for="item of message" v-on:click="clickMe(item.name);clickMe('saf');">
+        {{item.name}}
+    </div>
+    <test-component v-bind:inputs="message[0]"></test-component>
+    <div v-show="false">aslfasfj</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let vue1 = new Vue({
+        el: '#app',
+        data: {
+            message: 'hello'
+        }
+    })
+
+    Vue.component('test-component', {
+        props: ['inputs'],
+        template: '<p>{{inputs.text}}</p>'
+    })
+
+    let vue2 = new Vue({
+        el: '#app2',
+        data: {
+            message: [
+                {id: 1, name: 'wangdian', text: 'asfasf'},
+                {id: 2, name: 'zhaokun', text: 'asfasfdasdfasdf'}
+            ]
+        },
+        methods: {
+            clickMe: function (data) {
+                console.log(data);
+            }
+        }
+    })
+
+
+
+
+</script>
+</body>
+</html>
